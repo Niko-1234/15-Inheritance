@@ -1,0 +1,34 @@
+#include <iostream>
+#include "Account.h"
+
+//Constructor
+Account::Account(std::string AccName, double AccSaldo)
+    :Name{AccName}, Saldo{AccSaldo}{}
+
+bool Account::Deposit(double Amount){
+    if (Amount < 0){
+        return false;
+    } else {
+        Saldo += Amount;
+        return true;
+    }
+}
+
+bool Account::Withdraw(double Amount){
+    if (Saldo - Amount < 0 || Amount < 0){
+        return false;
+    }
+    else{
+        Saldo -= Amount;
+        return true;
+    }
+}
+
+double Account::GetBalance() const{
+    return Saldo;
+}
+
+std::ostream &operator<<(std::ostream &os, const Account &Account){
+    os << "[Account: " << Account.Name << ": " << Account.Saldo << "]";
+    return os;
+}
